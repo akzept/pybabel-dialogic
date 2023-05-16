@@ -20,6 +20,7 @@ class JsonExtractor(object):
         self.current_key = None
         self.results=[]
         self.token_params={}
+        self.linenum_accum = 0
 
     def add_result(self,token):
         value=unquote_string(token.value)
@@ -50,20 +51,23 @@ class JsonExtractor(object):
 
     def add_result(self,token):
         value=unquote_string(token.value)
-        result=dict(
-            line_number=token.lineno,
-            content=value
-        )
-        for key,value in self.token_params.items():
-            if key == 'alt_token':
-                result['alt_content']=unquote_string(value.value)
-                result['alt_line_number']=value.lineno
-            else:
-                result[key]=unquote_string(value)
+        for e in value.split("\n"):
+            
+            result=dict(
+                line_number=token.lineno + self.linenum_accum,
+                content=e
+            )
+            for key,value in self.token_params.items():
+                if key == 'alt_token':
+                    result['alt_content']=unquote_string(value.value)
+                    result['alt_line_number']=value.lineno
+                else:
+                    result[key]=unquote_string(value)
 
-        self.results.append(result)
-        self.token_to_add=None
-        self.token_params={}
+            self.results.append(result)
+            self.token_to_add=None
+            self.token_params={}
+            self.linenum_accum += 1
 
     def get_lines_data(self):
         """
