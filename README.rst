@@ -10,19 +10,19 @@ Install
 Point pip to install package from directory where `setup.py` is.
 `mkvirtualenv` strongly suggested.
 
-```
+.. code-block:: bash
 pip install -e /path/to/pybabel-dialogic/ 
-```
+
 
 After installing the package, configure your `babelfile` like follows:
 
-```
+.. code-block:: babel
 [ignore: dialogic/definitions.json]
 [ignore: dialogic/folder_structure.json]
 
 [dialogic: **.json]
 encoding = utf-8
-```
+
 
 Release notes
 --------------
