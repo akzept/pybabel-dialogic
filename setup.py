@@ -7,14 +7,14 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name='PyBabel-json',
+    name='PyBabel-dialogic',
     version='0.2.0',
-    description='PyBabel json gettext strings extractor',
-    author='Anton Bykov aka Tigra San',
+    description='PyBabel Dialogic json gettext strings extractor',
+    author='Anton Bykov aka Tigra San / Akzept',
     author_email='tigrawap@gmail.com',
     long_description=read('README.rst'),
-    packages=['pybabel_json'],
-    url="https://github.com/tigrawap/pybabel-json",
+    packages=['pybabel_dialogic'],
+    url="https://github.com/akzept/pybabel-dialogic",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -33,6 +33,6 @@ setup(
     include_package_data=True,
     entry_points = """
         [babel.extractors]
-        json = pybabel_json.extractor:extract_json
+        dialogic = pybabel_dialogic.extractor:extract_dialogic
         """,
 )

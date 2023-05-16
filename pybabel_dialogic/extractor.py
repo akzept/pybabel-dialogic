@@ -90,7 +90,8 @@ class JsonExtractor(object):
             elif token.type=='string':
                 if self.state=='key':
                     self.current_key=unquote_string(token.value)
-                    if self.current_key==JSON_GETTEXT_KEYWORD:
+                    
+                    if self.current_key==JSON_GETTEXT_KEYWORD: 
                         self.gettext_mode=True
 
                 #==value not actually used, but if only key was met (like in list) it still will be used. The important part, that key wont be parsed as value, not reversal
@@ -101,14 +102,15 @@ class JsonExtractor(object):
                         self.token_params['alt_token']=token
                     elif self.current_key==JSON_GETTEXT_KEY_FUNCNAME:
                         self.token_params['funcname']=token.value
-                else:
+                # AKZEPT: only add values that are relevant for Dialogic .json files
+                elif self.current_key in ['text', 'question', 'choice', 'display_name', 'description' ]:
                     self.token_to_add=token
 
         return self.results
 
-def extract_json(fileobj, keywords, comment_tags, options):
+def extract_dialogic(fileobj, keywords, comment_tags, options):
     """
-    Supports: gettext, ngettext. See package README or github ( https://github.com/tigrawap/pybabel-json ) for more usage info.
+    Supports: gettext, ngettext. See package README or github ( https://github.com/akzept/pybabel-dialogic ) for more usage info.
     """
     data=fileobj.read()
     json_extractor=JsonExtractor(data)
