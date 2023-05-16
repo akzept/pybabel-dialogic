@@ -4,7 +4,8 @@ PyBabel-dialogic
 This is a fork that tries to extract translation strings from Dialogic 1.5 json files.
 Original package: https://github.com/tigrawap/pybabel-json
 
-# Install
+Install
+--------------
 
 Point pip to install package from directory where `setup.py` is.
 `mkvirtualenv` strongly suggested.
